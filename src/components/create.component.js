@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 export default class Create extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +31,15 @@ export default class Create extends Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        console.log(`${this.state.student_name}`);
+        const obj = {
+            student_name: this.state.student_name,
+            school_name: this.state.school_name,
+            class_name: this.state.class_name
+        };
+        axios.post('http://localhost:4000/student/add', obj).then(
+            res => {
+                console.log(res.data);
+            });
         this.setState({
             student_name: '',
             school_name: '',
